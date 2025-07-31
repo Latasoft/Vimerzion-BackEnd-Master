@@ -1,0 +1,57 @@
+<section class="relative h-auto flex items-center justify-center overflow-hidden">
+    <div class="w-full max-w-7xl px-4">
+      <div class="relative overflow-hidden">
+        <img 
+          src="assets/user.svg" 
+          alt="Usuario con VR" 
+          class="mx-auto 
+            w-[85%]           
+            sm:w-[80%] 
+            md:w-[65%] 
+            lg:w-[50%] 
+            xl:w-[45%] 
+            2xl:w-[40%] 
+            h-auto 
+            max-w-full
+            object-contain"
+        />
+    </div>
+
+        <!-- Texto superpuesto -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center space-y-4 lg:space-y-6">
+            <h1 class="text-white flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8">
+              <span  
+              class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-widest cursor-pointer transition font-nexaRegular hover:text-[#00eefd]"
+              (click)="handleSelection('Personas')">
+            
+              PERSONAS
+            </span>
+            
+            <!-- Separador -->
+            <span 
+              class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light"
+            >
+              |
+            </span>
+            
+            <!-- Empresas -->
+            <span 
+             
+              class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-nexaHeavy tracking-widest cursor-pointer transition  hover:text-[#00eefd]"
+              (click)="handleSelection('Empresas')">
+            
+              EMPRESAS
+            </span>
+            </h1>
+        </div>
+
+        <!-- Subtítulo -->
+        <div class="absolute bottom-10 sm:bottom-10 md:bottom-14 lg:bottom-20 xl:bottom-24 2xl:bottom-28 w-full flex justify-center">
+          <p class="text-sm font-nexaRegular sm:text-base md:text-lg lg:text-xl text-white tracking-widest font-light uppercase">
+            LÍDERES EN EXPERIENCIAS INMERSIVAS
+          </p>
+        </div>
+        
+        
+    </div>
+</section>

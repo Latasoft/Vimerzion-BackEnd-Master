@@ -1,0 +1,55 @@
+<section class="w-full">
+    <!-- Título principal -->
+    <!-- Contenedor principal -->
+    <div class="max-w-6xl mx-auto relative">
+      <!-- Imagen -->
+      <div class="shadow-md  text-center max-w-[640px] mx-auto">
+        <div class="flex flex-col gap-4">
+          <div class="relative w-full h-[500px] rounded-lg overflow-hidden flex justify-center items-center">
+            <img
+              [src]="tecnologia.imagen.url"
+              [alt]="tecnologia.nombre"
+              class="rounded-lg shadow-lg align-middle transform hover:scale-105 transition-transform duration-300"
+              style="width: auto; max-width: 500px; height: 500px; object-fit: contain;"/>
+          </div>          
+        </div>
+      </div>
+  
+    
+    </div>
+  
+    <!-- Contenido adicional -->
+    <div class="mt-5 text-center text-white">
+        <h3 class="uppercase  font-nexaRegular text-3xl font-bold text-[#f1f1f1]">
+            {{ tecnologia.nombre }}
+          </h3>
+
+          <p class="text-lg mt-6 font-nexaBold text-[#f1f1f1]">
+            {{ tecnologia.descripcion }}
+          </p>
+    </div>
+
+    <div class="text-center text-[#f1f1f1] mt-8">
+      <!-- Contenedor de logos -->
+      <div class="flex justify-center items-center gap-6 sm:gap-8 lg:gap-12 mb-12 flex-wrap">
+        <img src="assets/PlayStation_VR2_logo (1).svg" alt="PlayStation VR" class="h-24 sm:h-24 lg:h-24 max-w-[140px]">
+        <img src="assets/Oculus_(10).svg" alt="Oculus" class="h-9 sm:h-16 lg:h-16 max-w-[120px]">
+        <img src="assets/Nintendo_Switch_Logo (1).svg" alt="Nintendo Switch" class="h-12 sm:h-16 lg:h-12 max-w-[120px]">
+        <img src="assets/kat-vr.svg" alt="Kat VR" class="h-5 sm:h-16 lg:h-5 max-w-[120px]">
+      </div>
+      
+    
+      <!-- Botón -->
+      <!-- Botón -->
+      <a 
+      [routerLink]="'/tienda'"
+      class="inline-block w-[90%] sm:w-[50%] bg-[#00eefd] text-center font-bold px-10 py-4 rounded-full  transition-all duration-300 shadow-lg"
+    >
+      <span class="text-[#1d1867] font-bold text-[20px] sm:text-[28px] tracking-wide">
+        Cotiza aquí
+      </span>
+    </a>
+    </div>
+    
+  </section>
+  

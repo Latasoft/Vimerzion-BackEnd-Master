@@ -1,0 +1,24 @@
+<section class="py-12 px-6  text-white">
+  <!-- Contenedor Principal -->
+  <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <!-- Contenedor de texto -->
+    <div class="space-y-6">
+      <h1 class="text-5xl font-extrabold">
+        <span>{{ titulo.split(' ')[0] }}</span>
+        <span class="text-[#00eefd]">{{ titulo.split(' ').slice(1).join(' ') }}</span>
+      </h1>
+
+      <!-- Descripción dinámica -->
+      <div class="text-lg leading-relaxed space-y-4" [innerHTML]="descripcion"></div>
+    </div>
+
+    <!-- Imagen -->
+    <div class="flex justify-center">
+      <img
+        [src]="imagenUrl"
+        alt="{{ titulo }}"
+        class="rounded-lg shadow-lg max-w-full h-auto transform hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+  </div>
+</section>

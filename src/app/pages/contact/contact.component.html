@@ -1,0 +1,62 @@
+<div class="contact-form bg-gray-100 p-8 rounded-lg shadow-md">
+  <form [formGroup]="contactForm">
+    
+    <!-- Nombre Solicitante -->
+    <div class="mb-4" *ngIf="visibilidadCampos?.nombre_solicitante">
+      <label for="nombre_solicitante" class="block text-sm font-medium text-gray-700">
+        {{ titulosCampos?.nombre_solicitante }}
+      </label>
+      <input type="text" id="nombre_solicitante" formControlName="nombre_solicitante"
+        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+    </div>
+    <div class="mb-4">
+  <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+  <input type="email" id="correo" formControlName="correo"
+    class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+</div>
+    <!-- Empresa -->
+    <div class="mb-4" *ngIf="visibilidadCampos?.empresa">
+      <label for="empresa" class="block text-sm font-medium text-gray-700">
+        {{ titulosCampos?.empresa }}
+      </label>
+      <input type="text" id="empresa" formControlName="empresa"
+        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+    </div>
+
+    <!-- Cargo -->
+    <div class="mb-4" *ngIf="visibilidadCampos?.cargo">
+      <label for="cargo" class="block text-sm font-medium text-gray-700">
+        {{ titulosCampos?.cargo }}
+      </label>
+      <input type="text" id="cargo" formControlName="cargo"
+        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+    </div>
+    <!-- Servicios a Arrendar -->
+<div class="mb-4" *ngIf="visibilidadCampos?.servicios !== false">
+  <label class="block text-sm font-medium text-gray-700">Servicios a Arrendar</label>
+  <div *ngFor="let servicio of serviciosDisponibles" class="flex items-center space-x-2">
+    <input type="checkbox"
+           [value]="servicio"
+           (change)="onCheckboxChange($event)"
+           [checked]="contactForm.get('servicios')?.value.includes(servicio)"
+           class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500">
+    <label class="text-sm font-medium text-gray-700">{{ servicio }}</label>
+  </div>
+</div>
+
+
+
+    <!-- Mensaje -->
+    <div class="mb-4">
+      <label for="mensaje" class="block text-sm font-medium text-gray-700">Mensaje</label>
+      <textarea id="mensaje" formControlName="mensaje" rows="4"
+        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+    </div>
+
+    <!-- Botón Enviar -->
+    <button (click)="submit()"
+      class="w-full font-montserrat bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+      Enviar
+    </button>
+  </form>
+</div>
