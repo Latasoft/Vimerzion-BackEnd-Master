@@ -5,7 +5,6 @@ import { finalize, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-catalogo-juego',
@@ -30,72 +29,34 @@ export class CatalogoJuegoComponent {
     private gameService: CatalogoService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-     //Funcion antigua
     // 🔥 SOLO UNA SUSCRIPCIÓN — SIN MEMORY LEAKS
-    //this.route.queryParams
-    // .pipe(
-    //   tap((params) => {
-    //     const newPlatform = params['platform']
-    //       ? this.mapPlatform(params['platform'])
-    //       : null;
+    this.route.queryParams
+      .pipe(
+        tap((params) => {
+          const newPlatform = params['platform']
+            ? this.mapPlatform(params['platform'])
+            : null;
 
-    //     // 🔥 SI CAMBIA LA PLATAFORMA → REINICIAR PAGINACIÓN
-    //     if (newPlatform !== this.currentPlatform) {
-    //       this.page = 1;
-    //     }
+          // 🔥 SI CAMBIA LA PLATAFORMA → REINICIAR PAGINACIÓN
+          if (newPlatform !== this.currentPlatform) {
+            this.page = 1;
+          }
 
-    //     this.currentPlatform = newPlatform;
-    //     this.assignPlatformLogo(newPlatform);
-    //   }),
+          this.currentPlatform = newPlatform;
+          this.assignPlatformLogo(newPlatform);
+        }),
 
-    //   // 🔥 CADA VEZ QUE CAMBIE LA PLATAFORMA O LA PÁGINA → CONSULTA A LA API
-    //   switchMap(() => {
-    //     this.loading = true;
-    //     return this.gameService
-    //       .getCatalogData(this.page, this.limit, this.currentPlatform)
-    //       .pipe(finalize(() => (this.loading = false)));
-    //   })
-    // )
-    // .subscribe({
-    //   next: (response) => {
-    //     this.juegos = response.games;
-    //     this.total = response.total;
-    //     this.page = response.page;
-    //     this.pages = response.pages;
-    //   },
-    //   error: (error) => {
-    //     console.error('Error al cargar el catálogo de juegos:', error);
-    //     this.juegos = [];
-    //   },
-    // });
-
-    //Funcion nueva
-    this.route.queryParams.subscribe(params => {
-      const platformParam = params['platform']
-        ? this.mapPlatform(params['platform'])
-        : null;
-
-      if (platformParam !== this.currentPlatform) {
-        this.page = 1;
-      }
-
-      this.currentPlatform = platformParam;
-      this.assignPlatformLogo(platformParam);
-
-      this.fetchCatalog();
-    });
-
-  }
-
-  fetchCatalog(): void {
-    this.loading = true;
-
-    this.gameService
-      .getCatalogData(this.page, this.limit, this.currentPlatform)
-      .pipe(finalize(() => (this.loading = false)))
+        // 🔥 CADA VEZ QUE CAMBIE LA PLATAFORMA O LA PÁGINA → CONSULTA A LA API
+        switchMap(() => {
+          this.loading = true;
+          return this.gameService
+            .getCatalogData(this.page, this.limit, this.currentPlatform)
+            .pipe(finalize(() => (this.loading = false)));
+        })
+      )
       .subscribe({
         next: (response) => {
           this.juegos = response.games;
@@ -104,12 +65,11 @@ export class CatalogoJuegoComponent {
           this.pages = response.pages;
         },
         error: (error) => {
-          console.error('Error al cargar el catálogo:', error);
+          console.error('Error al cargar el catálogo de juegos:', error);
           this.juegos = [];
         },
       });
   }
-
 
   // ✔ Error de imagen → imagen por defecto
   handleImageError(event: Event): void {
@@ -196,24 +156,22 @@ export class CatalogoJuegoComponent {
   nextPage(): void {
     if (this.page < this.pages) {
       this.page++;
-      this.fetchCatalog();
-      //this.triggerRefresh();
+      this.triggerRefresh();
     }
   }
 
   prevPage(): void {
     if (this.page > 1) {
       this.page--;
-      this.fetchCatalog();
-      //this.triggerRefresh();
+      this.triggerRefresh();
     }
   }
 
   // Fuerza un refresco actualizando queryParams “virtualmente”
-  // private triggerRefresh(): void {
-  //   // Esto vuelve a activar la suscripción principal de ngOnInit
-  //   this.route.queryParams.subscribe(() => {});
-  // }
+  private triggerRefresh(): void {
+    // Esto vuelve a activar la suscripción principal de ngOnInit
+    this.route.queryParams.subscribe(() => {});
+  }
 
   trackById(index: number, item: FetchCatalogo): string {
     return item._id;
