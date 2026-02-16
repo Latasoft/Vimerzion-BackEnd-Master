@@ -33,11 +33,7 @@ export class CatalogoJuegoComponent {
   ) { }
 
   ngOnInit(): void {
-<<<<<<< HEAD
     //Funcion antigua
-=======
-     //Funcion antigua
->>>>>>> 3504b25454135a662e78b44f1a4c29246912ba28
     // 🔥 SOLO UNA SUSCRIPCIÓN — SIN MEMORY LEAKS
     //this.route.queryParams
     // .pipe(
